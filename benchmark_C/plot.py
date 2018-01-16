@@ -28,15 +28,17 @@ if type_ == 'bw':
     x2 = np.log2(data2[2:,0])
     y1 = data1[2:,1]/1024
     y2 = data2[2:,1]/1024
-    ylabel='bandwidth (GB/s)'
+    ylabel = 'bandwidth (GB/s)'
+    title = 'Memory Bandwidth'
     legend1, legend2 = 'read', 'write'
 else:
     x1 = np.log2(data1[::2,0])[1:]
     x2 = np.log2(data2[::2,0])[1:]
     y1 = data1[::2,1][1:]
     y2 = data2[::2,1][1:]
-    ylabel='latency (ns)'
-    legend1, legend2 = 'random', 'sequential'
+    ylabel = 'latency (ns)'
+    title = 'Memory latency '
+    legend1, legend2 = 'random access', 'sequential access'
 
 xlabel='block size'
 maxy = max(y1.max(), y2.max())
@@ -49,6 +51,8 @@ plt.ylabel(ylabel)
 plt.xlabel(xlabel)
 p2, = plt.plot(x2, y2, 'o')
 plt.xticks(x2, labs, rotation=60)
+if type_ != 'bw':
+    plt.yticks(range(0, 110, 10))
 plt.legend((p1, p2), (legend1, legend2))
 # draw caches
 # L1
@@ -60,5 +64,6 @@ plt.text(x1[L2i-1], (miny+maxy)/2, 'L2\n⟵', color='darkblue', verticalalignmen
 # L3
 plt.plot(((x1[L3i]+x1[L3i+1])/2, (x1[L3i]+x1[L3i+1])/2), (miny,maxy), color='darkblue', alpha=0.4)
 plt.text(x1[L3i-1]+(x1[L3i]-x1[L3i-1])/2, (miny+maxy)/2, 'L3\n⟵', color='darkblue', verticalalignment='top')
+plt.title(title)
 plt.savefig(pic)
 plt.show()
