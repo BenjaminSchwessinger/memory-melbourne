@@ -41,4 +41,5 @@ l1 = labels.index('4M')
 plt.plot((l1-0.5, l1-0.5), (miny, maxy), color='darkblue', alpha=0.4)
 plt.text(l1-1.5, (miny+maxy)/2, 'L3\n⟵', color='darkblue', verticalalignment='top')
 
+plt.savefig('loading_data.svg')
 plt.show()
