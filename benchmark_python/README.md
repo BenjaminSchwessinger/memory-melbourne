@@ -32,5 +32,5 @@ Laptop manufacturer specs:
         ts[idx, :] = np.load(file)
     ```
   - Time the *bad* and the *good* loop
-  - Results files are names `result_N_S` for each `N` and `S`. Each result file contains (size, time bad (s), time good (s)).
+  - Results files are named `result_N_S` for each `N` and `S`. Each result file contains (size, time bad (s), time good (s)).
   - The plot above shows the ratio between the *bad* and the *good* timing as a function of `S` for `N=30`. 
