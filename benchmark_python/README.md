@@ -17,8 +17,8 @@ Laptop manufacturer specs:
 
 ## Benchmarks details:
 
-  - Create on disk a collection of N numpy arrays of size S from 2^9 to 2^28 bytes for all powers of two in between, that is from 512B up to 256MB. The arrays are of data type `float64`. Given that each `float64` item is 8-bytes, this means the arrays are of length L from 8 to 33,554,432.
-  - Load the whole collection in memory by reading it in a single numpy array of size (N,L) (*good*) or (L,N) (*bad*). The corresponding loop is 
+  - Create on disk a collection of `N` numpy arrays of size `S` from 2^9 to 2^28 bytes for all powers of two in between, that is from 512B up to 256MB. The arrays are of data type `float64`. Given that each `float64` item is 8-bytes, this means the arrays are of length `L` from 8 to 33,554,432.
+  - Load the whole collection in memory by reading it in a single numpy array of size (`N`,`L`) (*good*) or (`L`,`N`) (*bad*). The corresponding loop is 
 
     ```python
     # good loop
@@ -31,3 +31,6 @@ Laptop manufacturer specs:
     for idx in range(N):
         ts[idx, :] = np.load(file)
     ```
+  - Time the *bad* and the *good* loop
+  - Results files are names `result_N_S` for each `N` and `S`. Each result file contains (size, time bad (s), time good (s)).
+  - The plot above shows the ratio between the *bad* and the *good* timing as a function of `S` for `N=30`. 
