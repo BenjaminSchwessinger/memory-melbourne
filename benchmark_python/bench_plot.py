@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+import os
 import sys
+
 import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
@@ -9,27 +11,20 @@ matplotlib.rcParams['font.size'] = 12
 
 plt.figure(figsize=(8.5, 7.5))
 plts = []
-for fname in sys.argv[1:]:
-    labels, bads, goods = [], [], []
-    with open(fname, 'r') as fh:
-        for line in fh:
-            label, bad, good = line.split()
-            bads.append(float(bad))
-            goods.append(float(good))
-            labels.append(label)
+labels, bads, goods = [], [], []
+with open(sys.argv[1], 'r') as fh:
+    for line in fh:
+        label, bad, good = line.split()
+        bads.append(float(bad))
+        goods.append(float(good))
+        labels.append(label)
 
-    #p1, = plt.plot(range(len(bads)), bads, 'o')
-    p, = plt.plot(range(len(bads)), np.divide(bads, goods), 'o')
-    plts.append(p)
-    #p2, = plt.plot(range(len(goods)), goods, 'o')
-
-counts = []
-for fname in sys.argv[1:]:
-    _, count, _ = fname.split('_')
-    counts.append(int(count))
+p, = plt.plot(range(len(bads)), np.divide(bads, goods), 'o')
+plts.append(p)
 
 plt.ylabel('slowdown')
 plt.xlabel('size')
+plt.title('Loading data contiguous/flipped')
 plt.xticks(range(len(bads)), labels, rotation=60)
 # draw caches
 miny, maxy = min(np.divide(bads, goods)), max(np.divide(bads, goods))
