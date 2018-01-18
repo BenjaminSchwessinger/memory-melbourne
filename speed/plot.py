@@ -68,7 +68,7 @@ for fl in ('cpu_frequency.csv', 'memory_reduced.csv', 'storage_reduced.csv'):
         plt.semilogy(xloc[-5], [300], 'o', color='darkblue')
         plt.grid(None)
         plt.grid(which='both', axis='y')
-        plt.ylim(0.05, 3000)
+        plt.ylim(0.05, 4500)
         plt.yticks([0.1,1,10,100,1000], ['100 KB/s', '1 MB/s', '10 MB/s', '100 MB/s', '1 GB/s'])
         plt.xticks(xloc[::1], labels[::1], rotation=45, ha='right')
         plt.title('Storage speed')
